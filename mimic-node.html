@@ -1,0 +1,1200 @@
+<script type="text/javascript">
+RED.nodes.registerType('ServerURL', {
+	category : 'MIMIC-API',
+	color : '#a6bbcf',
+	defaults : {
+		name : {
+			value : "http://127.0.0.1:8080"
+		},
+	},
+	inputs : 1,
+	outputs : 1,
+	label : function() {
+		return this.name || "ServerURL";
+	},
+	oneditprepare : function() {
+		// set current value
+		$("#node-input-name").val(this.name);
+	}
+});
+
+var API = 	
+	{
+		"": [],
+		"mimic_add_access": [
+			"user",
+			"Accessagents",
+			"mask"
+		],
+		"mimic_add_timer_script": [
+			"script",
+			"interval",
+			"argums"
+		],
+		"mimic_agent_add_ipalias": [
+			"agentNo",
+			"address",
+			"port",
+			"mask",
+			"iface"
+		],
+		"mimic_agent_add_timer_script": [
+			"agentNo",
+			"script",
+			"interval",
+			"argums"
+		],
+		"mimic_agent_configure": [
+			"agentNo",
+			"address",
+			"mibs"
+		],
+		"mimic_agent_del_ipalias": [
+			"agentNo",
+			"address",
+			"port"
+		],
+		"mimic_agent_del_timer_script": [
+			"agentNo",
+			"script",
+			"interval"
+		],
+		"mimic_agent_from_add": [
+			"agentNo",
+			"host",
+			"port"
+		],
+		"mimic_agent_from_del": [
+			"agentNo",
+			"host",
+			"port"
+		],
+		"mimic_agent_from_list": [
+			"agentNo"
+		],
+		"mimic_agent_get_changed": [
+			"agentNo"
+		],
+		"mimic_agent_get_config_changed": [
+			"agentNo"
+		],
+		"mimic_agent_get_delay": [
+			"agentNo"
+		],
+		"mimic_agent_get_drops": [
+			"agentNo"
+		],
+		"mimic_agent_get_host": [
+			"agentNo"
+		],
+		"mimic_agent_get_inform_retries": [
+			"agentNo"
+		],
+		"mimic_agent_get_inform_timeout": [
+			"agentNo"
+		],
+		"mimic_agent_get_interface": [
+			"agentNo"
+		],
+		"mimic_agent_get_mask": [
+			"agentNo"
+		],
+		"mimic_agent_get_mibs": [
+			"agentNo"
+		],
+		"mimic_agent_get_oiddir": [
+			"agentNo"
+		],
+		"mimic_agent_get_owner": [
+			"agentNo"
+		],
+		"mimic_agent_get_pdusize": [
+			"agentNo"
+		],
+		"mimic_agent_get_port": [
+			"agentNo"
+		],
+		"mimic_agent_get_privdir": [
+			"agentNo"
+		],
+		"mimic_agent_get_protocols": [
+			"agentNo"
+		],
+		"mimic_agent_get_read_community": [
+			"agentNo"
+		],
+		"mimic_agent_get_scen": [
+			"agentNo"
+		],
+		"mimic_agent_get_sim": [
+			"agentNo"
+		],
+		"mimic_agent_get_starttime": [
+			"agentNo"
+		],
+		"mimic_agent_get_state": [
+			"agentNo"
+		],
+		"mimic_agent_get_state_changed": [
+			"agentNo"
+		],
+		"mimic_agent_get_statistics": [
+			"agentNo"
+		],
+		"mimic_agent_get_trace": [
+			"agentNo"
+		],
+		"mimic_agent_get_validate": [
+			"agentNo"
+		],
+		"mimic_agent_get_write_community": [
+			"agentNo"
+		],
+		"mimic_agent_halt": [
+			"agentNo"
+		],
+		"mimic_agent_list_ipaliases": [
+			"agentNo"
+		],
+		"mimic_agent_list_timer_scripts": [
+			"agentNo"
+		],
+		"mimic_agent_mget_changed": [
+			"agentNos"
+		],
+		"mimic_agent_mget_config_changed": [
+			"agentNos"
+		],
+		"mimic_agent_mget_delay": [
+			"agentNos"
+		],
+		"mimic_agent_mget_drops": [
+			"agentNos"
+		],
+		"mimic_agent_mget_host": [
+			"agentNos"
+		],
+		"mimic_agent_mget_inform_retries": [
+			"agentNos"
+		],
+		"mimic_agent_mget_inform_timeout": [
+			"agentNos"
+		],
+		"mimic_agent_mget_interface": [
+			"agentNos"
+		],
+		"mimic_agent_mget_mask": [
+			"agentNos"
+		],
+		"mimic_agent_mget_mibs": [
+			"agentNos"
+		],
+		"mimic_agent_mget_oiddir": [
+			"agentNos"
+		],
+		"mimic_agent_mget_owner": [
+			"agentNos"
+		],
+		"mimic_agent_mget_pdusize": [
+			"agentNos"
+		],
+		"mimic_agent_mget_port": [
+			"agentNos"
+		],
+		"mimic_agent_mget_privdir": [
+			"agentNos"
+		],
+		"mimic_agent_mget_protocols": [
+			"agentNos"
+		],
+		"mimic_agent_mget_read_community": [
+			"agentNos"
+		],
+		"mimic_agent_mget_scen": [
+			"agentNos"
+		],
+		"mimic_agent_mget_sim": [
+			"agentNos"
+		],
+		"mimic_agent_mget_starttime": [
+			"agentNos"
+		],
+		"mimic_agent_mget_state": [
+			"agentNos"
+		],
+		"mimic_agent_mget_state_changed": [
+			"agentNos"
+		],
+		"mimic_agent_mget_statistics": [
+			"agentNos"
+		],
+		"mimic_agent_mget_trace": [
+			"agentNos"
+		],
+		"mimic_agent_mget_validate": [
+			"agentNos"
+		],
+		"mimic_agent_mget_write_community": [
+			"agentNos"
+		],
+		"mimic_agent_mset_delay": [
+			"agentNos",
+			"delays"
+		],
+		"mimic_agent_mset_drops": [
+			"agentNos",
+			"drops"
+		],
+		"mimic_agent_mset_host": [
+			"agentNos",
+			"hosts"
+		],
+		"mimic_agent_mset_inform_retries": [
+			"agentNos",
+			"retries"
+		],
+		"mimic_agent_mset_inform_timeout": [
+			"agentNos",
+			"timeouts"
+		],
+		"mimic_agent_mset_interface": [
+			"agentNos",
+			"interfaces"
+		],
+		"mimic_agent_mset_mask": [
+			"agentNos",
+			"masks"
+		],
+		"mimic_agent_mset_mibs": [
+			"agentNos",
+			"mibs"
+		],
+		"mimic_agent_mset_oiddir": [
+			"agentNos",
+			"oids"
+		],
+		"mimic_agent_mset_pdusize": [
+			"agentNos",
+			"pdusizes"
+		],
+		"mimic_agent_mset_port": [
+			"agentNos",
+			"ports"
+		],
+		"mimic_agent_mset_protocol": [
+			"agentNos",
+			"protocols"
+		],
+		"mimic_agent_mset_read": [
+			"agentNos",
+			"readcomms"
+		],
+		"mimic_agent_mset_starttime": [
+			"agentNos",
+			"starttimes"
+		],
+		"mimic_agent_mset_trace": [
+			"agentNos",
+			"flags"
+		],
+		"mimic_agent_mset_validate": [
+			"agentNos",
+			"flags"
+		],
+		"mimic_agent_mset_write": [
+			"agentNos",
+			"writecomms"
+		],
+		"mimic_agent_pause_at": [
+			"agentNo",
+			"time"
+		],
+		"mimic_agent_pause_now": [
+			"agentNo"
+		],
+		"mimic_agent_protocol_msg": [
+			"agentNo",
+			"protocol",
+			"msg"
+		],
+		"mimic_agent_remove": [
+			"agentNo"
+		],
+		"mimic_agent_resume": [
+			"agentNo"
+		],
+		"mimic_agent_save": [
+			"agentNo"
+		],
+		"mimic_agent_set_delay": [
+			"agentNo",
+			"delay"
+		],
+		"mimic_agent_set_drops": [
+			"agentNo",
+			"drop"
+		],
+		"mimic_agent_set_host": [
+			"agentNo",
+			"host"
+		],
+		"mimic_agent_set_inform_retries": [
+			"agentNo",
+			"retry"
+		],
+		"mimic_agent_set_inform_timeout": [
+			"agentNo",
+			"timeout"
+		],
+		"mimic_agent_set_interface": [
+			"agentNo",
+			"iface"
+		],
+		"mimic_agent_set_mask": [
+			"agentNo",
+			"mask"
+		],
+		"mimic_agent_set_mibs": [
+			"agentNo",
+			"values"
+		],
+		"mimic_agent_set_oiddir": [
+			"agentNo",
+			"oiddir"
+		],
+		"mimic_agent_set_pdusize": [
+			"agentNo",
+			"pdusize"
+		],
+		"mimic_agent_set_port": [
+			"agentNo",
+			"port"
+		],
+		"mimic_agent_set_protocols": [
+			"agentNo",
+			"protocols"
+		],
+		"mimic_agent_set_read_community": [
+			"agentNo",
+			"readcomm"
+		],
+		"mimic_agent_set_starttime": [
+			"agentNo",
+			"starttime"
+		],
+		"mimic_agent_set_trace": [
+			"agentNo",
+			"flag"
+		],
+		"mimic_agent_set_validate": [
+			"agentNo",
+			"flag"
+		],
+		"mimic_agent_set_write_community": [
+			"agentNo",
+			"writecomm"
+		],
+		"mimic_agent_start": [
+			"agentNo"
+		],
+		"mimic_agent_start_ipalias": [
+			"agentNo",
+			"address",
+			"port"
+		],
+		"mimic_agent_status_ipalias": [
+			"agentNo",
+			"address",
+			"port"
+		],
+		"mimic_agent_stop": [
+			"agentNo"
+		],
+		"mimic_agent_stop_ipalias": [
+			"agentNo",
+			"address",
+			"port"
+		],
+		"mimic_agent_store_append": [
+			"agentNo",
+			"varName",
+			"value",
+			"persist"
+		],
+		"mimic_agent_store_copy": [
+			"agentNo",
+			"other"
+		],
+		"mimic_agent_store_exists": [
+			"agentNo",
+			"varName"
+		],
+		"mimic_agent_store_get": [
+			"agentNo",
+			"varName"
+		],
+		"mimic_agent_store_list": [
+			"agentNo"
+		],
+		"mimic_agent_store_lreplace": [
+			"agentNo",
+			"varName",
+			"index",
+			"value"
+		],
+		"mimic_agent_store_mget": [
+			"agentNo",
+			"varNames"
+		],
+		"mimic_agent_store_mlreplace": [
+			"agentNo",
+			"varlist",
+			"indexlist",
+			"vallist"
+		],
+		"mimic_agent_store_set": [
+			"agentNo",
+			"varName",
+			"value",
+			"persist"
+		],
+		"mimic_agent_store_unset": [
+			"agentNo",
+			"varName"
+		],
+		"mimic_agent_trap_config_add": [
+			"agentNo",
+			"address",
+			"port"
+		],
+		"mimic_agent_trap_config_del": [
+			"agentNo",
+			"address",
+			"port"
+		],
+		"mimic_agent_trap_config_list": [
+			"agentNo"
+		],
+		"mimic_agent_trap_list": [
+			"agentNo"
+		],
+		"mimic_agent_valuespace_add": [
+			"agentNo",
+			"obj",
+			"instance"
+		],
+		"mimic_agent_valuespace_eval_value": [
+			"agentNo",
+			"obj",
+			"instance"
+		],
+		"mimic_agent_valuespace_get_info": [
+			"agentNo",
+			"obj"
+		],
+		"mimic_agent_valuespace_get_instances": [
+			"agentNo",
+			"obj"
+		],
+		"mimic_agent_valuespace_get_mib": [
+			"agentNo",
+			"obj"
+		],
+		"mimic_agent_valuespace_get_minfo": [
+			"agentNo",
+			"objs"
+		],
+		"mimic_agent_valuespace_get_name": [
+			"agentNo",
+			"oid"
+		],
+		"mimic_agent_valuespace_get_objects": [
+			"agentNo"
+		],
+		"mimic_agent_valuespace_get_oid": [
+			"agentNo",
+			"obj"
+		],
+		"mimic_agent_valuespace_get_pos": [
+			"agentNo"
+		],
+		"mimic_agent_valuespace_get_state": [
+			"agentNo",
+			"obj"
+		],
+		"mimic_agent_valuespace_get_value": [
+			"agentNo",
+			"obj",
+			"instance",
+			"varName"
+		],
+		"mimic_agent_valuespace_get_variables": [
+			"agentNo",
+			"obj",
+			"instance"
+		],
+		"mimic_agent_valuespace_meval_value": [
+			"agentNo",
+			"objs",
+			"instances"
+		],
+		"mimic_agent_valuespace_mget_value": [
+			"agentNo",
+			"objs",
+			"instances",
+			"varNames"
+		],
+		"mimic_agent_valuespace_mset_value": [
+			"agentNo",
+			"objs",
+			"instances",
+			"varNames",
+			"values"
+		],
+		"mimic_agent_valuespace_munset_value": [
+			"agentNo",
+			"objs",
+			"instances",
+			"varNames"
+		],
+		"mimic_agent_valuespace_remove": [
+			"agentNo",
+			"obj",
+			"instance"
+		],
+		"mimic_agent_valuespace_set_pos": [
+			"agentNo",
+			"pos"
+		],
+		"mimic_agent_valuespace_set_state": [
+			"agentNo",
+			"obj",
+			"state"
+		],
+		"mimic_agent_valuespace_set_value": [
+			"agentNo",
+			"obj",
+			"instance",
+			"varName",
+			"value"
+		],
+		"mimic_agent_valuespace_split_oid": [
+			"agentNo",
+			"oid"
+		],
+		"mimic_agent_valuespace_unset_value": [
+			"agentNo",
+			"obj",
+			"instance",
+			"varName"
+		],
+		"mimic_cfg_load": [
+			"file"
+		],
+		"mimic_cfg_new": [],
+		"mimic_cfg_save": [],
+		"mimic_cfg_saveas": [
+			"file"
+		],
+		"mimic_del_access": [
+			"user"
+		],
+		"mimic_del_timer_script": [
+			"script",
+			"interval"
+		],
+		"mimic_get_access_acldb": [],
+		"mimic_get_access_admindir": [],
+		"mimic_get_access_adminuser": [],
+		"mimic_get_access_enabled": [],
+		"mimic_get_active_data_list": [],
+		"mimic_get_active_list": [],
+		"mimic_get_cfg_file_changed": [],
+		"mimic_get_cfgfile": [],
+		"mimic_get_changed_config_list": [],
+		"mimic_get_changed_state_list": [],
+		"mimic_get_clients": [],
+		"mimic_get_configured_list": [],
+		"mimic_get_expiration": [
+			"days"
+		],
+		"mimic_get_interfaces": [],
+		"mimic_get_last": [],
+		"mimic_get_licensing": [],
+		"mimic_get_log": [],
+		"mimic_get_free_vm": [],
+		"mimic_get_max": [],
+		"mimic_get_netaddr": [],
+		"mimic_get_netdev": [],
+		"mimic_get_product": [],
+		"mimic_get_protocols": [],
+		"mimic_get_sim_privdir": [],
+		"mimic_get_version": [],
+		"mimic_list_access": [],
+		"mimic_list_timer_scripts": [],
+		"mimic_load_access": [
+			"file"
+		],
+		"mimic_protocol_msg": [
+			"protocol",
+			"msg"
+		],
+		"mimic_save_access": [
+			"file"
+		],
+		"mimic_set_access_acldb": [
+			"acldb"
+		],
+		"mimic_set_access_admindir": [
+			"dir"
+		],
+		"mimic_set_access_adminuser": [
+			"user"
+		],
+		"mimic_set_access_enabled": [
+			"arg"
+		],
+		"mimic_set_log": [
+			"logfile"
+		],
+		"mimic_start_all_agents": [],
+		"mimic_stop_all_agents": [],
+		"mimic_store_append": [
+			"varName",
+			"value",
+			"persist"
+		],
+		"mimic_store_exists": [
+			"varName"
+		],
+		"mimic_store_get": [
+			"varName"
+		],
+		"mimic_store_list": [],
+		"mimic_store_lreplace": [
+			"varName",
+			"index",
+			"value"
+		],
+		"mimic_store_mget": [
+			"varNames"
+		],
+		"mimic_store_mlreplace": [
+			"varNames",
+			"indexs",
+			"values"
+		],
+		"mimic_store_save": [],
+		"mimic_store_set": [
+			"varName",
+			"value",
+			"persist"
+		],
+		"mimic_store_unset": [
+			"varName"
+		],
+		"mimic_trap_config_add": [
+			"destination",
+			"port"
+		],
+		"mimic_trap_config_delete": [
+			"destination",
+			"port"
+		],
+		"mimic_trap_config_list": []
+	};
+
+	var paramDataTypes = {"number":["agentNo","arg","days","delay","drop","flag","index","interval","other","pdusize","port","retry","starttime","time","timeout","state", "persist"],
+		"string":["acldb","address","dir","file","host","iface","value","logfile","mask","msg","oiddir","readcomm","writecomm","script","user","varName","protocol","Accessagents","argums","obj", "instance","oid","pos", "variable", "destination"],
+		"object":{"number":["agentNos","delays","drops","flags","ports","pdusizes","starttimes","timeouts","retries", "indexs"], "string":["hosts","masks","mibs","protocols","varNames","values","objs", "instances", "variables", "interfaces", "readcomms", "writecomms", "oids"]}
+	};
+
+	function saveChanges() {
+		var name = $("#node-input-api option:selected").val();
+		// set node label (name)
+		$("#node-input-name").val(name);
+	}
+	
+	function selectionChanged() {
+		var name = $("#node-input-api option:selected").val();
+
+		// get node label (name)
+		oldName = $("#node-input-name").val();
+		
+		var params = API[name];
+		
+		var help_str = "<b>"+name+":</b><br>";
+		var help_str1 = "<br>This function accepts following parameter(s) :";
+		var help_str3 = "<br><b>Note:</b> <br/> For type object.string the value should be an Array in JSON of type String for e.g. ['one','two','three'].";
+		help_str3 += "<br>And for type object.number the value should be an Array in JSON of type number for e.g. [1,2,3].";
+		var help_str3_flag = 0;
+		
+		for (var i = 0; i < 10; i++) {
+			if(i < params.length) {
+				$("#arg"+i).css("display","block");
+				$("#label-input-arg"+i).html(params[i]);
+				$("#node-input-arg"+i).attr("placeholder", params[i]);
+				if(oldName !== name) {
+					$("#node-input-arg"+i).val("");
+				}
+				help_str1 += "<br>" + (i+1) + ". " + params[i] + " as ";
+				
+				for (key2 in paramDataTypes) {
+					if (key2 === 'object') {
+						help_str3_flag = 1;
+						for (key3 in paramDataTypes.object) {
+							if (paramDataTypes.object[key3].includes(params[i]) === true) {
+								$("#node-input-arg"+i).typedInput({
+									types: ["json"]
+								});
+								help_str1 += "array of " + key3;
+								break;
+							}
+						}
+					} else {
+						if (paramDataTypes[key2].includes(params[i]) === true) {
+							switch(key2) {
+								case "number":
+									$("#node-input-arg"+i).typedInput({
+										types: ["num"]
+									});
+									
+									help_str1 += key2;
+								break;
+								case "string":
+									$("#node-input-arg"+i).typedInput({
+										types: ["str"]
+									});
+									
+									help_str1 += key2;
+								break;
+							}
+							break;
+						}
+					}
+				}
+			} else {
+				$("#arg"+i).css("display","none");
+				$("#label-input-arg"+i).html("");
+				$("#node-input-arg"+i).attr("placeholder", "");
+				$("#node-input-arg"+i).val("");
+			}
+		}
+
+		help_str1 += "<br><br>To dynamically pass the parameter to this function node,";
+		help_str1 += "<br>use 'msg.payload' as shown below";
+		help_str1 += "<br><br>'msg.payload.&lt;parameter&gt; = &lt;value&gt;'";
+		help_str1 += "<br><br> OR <br>";
+		help_str1 += "<br>msg.payload = {'&lt;parameter&gt;' : &lt;value&gt;}";
+		help_str1 += "<br><br>Note: Parameter names are case sensitive,<br>value should be of specified data-type.";
+		
+		if (params.length > 0) {
+			help_str += help_str1;
+			if (help_str3_flag === 1) {
+				help_str += help_str3;
+			}
+		} else {
+			help_str += "<br>This function accepts no parameters."
+		}
+		
+		if( name === "" ) {
+			$("#desc-note").empty();
+			$("#desc-note").append("Select function in above drop-list");
+		} else {
+			$("#desc-note").empty();
+			$("#desc-note").append(help_str);
+		}		
+	}
+	
+	RED.nodes.registerType('mimic', {
+		category : 'MIMIC-API',
+		color : '#a6bbcf',
+		defaults : {
+			name : {
+				value : ""
+			},
+			api : {
+				value : ""
+			},
+			arg0 : {
+				value : ""
+			},
+			arg1 : {
+				value : ""
+			},
+			arg2 : {
+				value : ""
+			},
+			arg3 : {
+				value : ""
+			},
+			arg4 : {
+				value : ""
+			},
+			arg5 : {
+				value : ""
+			},
+			arg6 : {
+				value : ""
+			},
+			arg7 : {
+				value : ""
+			},
+			arg8 : {
+				value : ""
+			},
+			arg9 : {
+				value : ""
+			}
+		},
+		inputs : 1,
+		outputs : 1,
+		label : function() {
+			return this.api || "mimic";
+		},
+		oneditprepare : function() {
+			$("#node-input-api").empty();
+			$("#args").empty();
+
+			for (key in API) {
+				if (key === "") {
+					$('#node-input-api').append(
+							'<option value="'+key+'">' + key + '</option>');
+					continue;
+				}
+				if (/mimic_agent/.test(key) === true) {
+					continue;
+				}
+				$('#node-input-api').append(
+						'<option value="'+key+'">' + key.substring("mimic_".length) + '</option>');
+			}
+
+			$("#node-input-api").change(selectionChanged);
+
+			// set current value
+			$("#node-input-api").val(this.api);
+		},
+        oneditsave: saveChanges	
+	});
+
+	RED.nodes.registerType('agent', {
+		category : 'MIMIC-API',
+		color : '#a6bbcf',
+		defaults : {
+			name : {
+				value : ""
+			},
+			api : {
+				value : ""
+			},
+			arg0 : {
+				value : ""
+			},
+			arg1 : {
+				value : ""
+			},
+			arg2 : {
+				value : ""
+			},
+			arg3 : {
+				value : ""
+			},
+			arg4 : {
+				value : ""
+			},
+			arg5 : {
+				value : ""
+			},
+			arg6 : {
+				value : ""
+			},
+			arg7 : {
+				value : ""
+			},
+			arg8 : {
+				value : ""
+			},
+			arg9 : {
+				value : ""
+			}
+		},
+		inputs : 1,
+		outputs : 1,
+		label : function() {
+			return this.api || "agent";
+		},
+		oneditprepare : function() {
+			$("#node-input-api").empty();
+			$("#args").empty();
+
+			for (key in API) {
+				if (key === "") {
+					$('#node-input-api').append(
+							'<option value="'+key+'">' + key + '</option>');
+					continue;
+				}
+				if (/mimic_agent/.test(key) === false) {
+					continue;
+				}
+				if (/mimic_agent_valuespace/.test(key) === true) {
+					continue;
+				}
+				$('#node-input-api').append(
+						'<option value="'+key+'">' + key.substring("mimic_agent_".length) + '</option>');
+			}
+
+			$("#node-input-api").change(selectionChanged);
+
+			// set current value
+			$("#node-input-api").val(this.api);
+		},
+        oneditsave: saveChanges	
+	});
+
+	RED.nodes.registerType('valuespace', {
+		category : 'MIMIC-API',
+		color : '#a6bbcf',
+		defaults : {
+			name : {
+				value : ""
+			},
+			api : {
+				value : ""
+			},
+			arg0 : {
+				value : ""
+			},
+			arg1 : {
+				value : ""
+			},
+			arg2 : {
+				value : ""
+			},
+			arg3 : {
+				value : ""
+			},
+			arg4 : {
+				value : ""
+			},
+			arg5 : {
+				value : ""
+			},
+			arg6 : {
+				value : ""
+			},
+			arg7 : {
+				value : ""
+			},
+			arg8 : {
+				value : ""
+			},
+			arg9 : {
+				value : ""
+			}
+		},
+		inputs : 1,
+		outputs : 1,
+		label : function() {
+			return this.api || "valuespace";
+		},
+		oneditprepare : function() {
+			$("#node-input-api").empty();
+			$("#args").empty();
+
+			for (key in API) {
+				if (key === "") {
+					$('#node-input-api').append(
+							'<option value="'+key+'">' + key + '</option>');
+					continue;
+				}
+				if (/mimic_agent_valuespace/.test(key) === false) {
+					continue;
+				}
+				$('#node-input-api').append(
+						'<option value="'+key+'">' + key.substring("mimic_agent_valuespace_".length) + '</option>');
+			}
+
+			$("#node-input-api").change(selectionChanged);
+
+			// set current value
+			$("#node-input-api").val(this.api);
+		},
+        oneditsave: saveChanges	
+	});
+</script>
+
+<script type="text/x-red" data-template-name="ServerURL">
+	<div class="form-row" id="args">
+        <label for="node-input-name">Server URL</label>
+		<input type="text" id="node-input-name" placeholder="http://127.0.0.1:8080">
+	</div>
+</script>
+
+<script type="text/x-red" data-help-name="ServerURL">
+    <p>Node to register MIMIC API - Server URL</p>
+</script>
+
+<script type="text/x-red" data-template-name="mimic">
+	<div class="form-row" id="select-div">
+        <label for="node-input-api">Invoke</label>
+        <select value="" id="node-input-api" placeholder=""></select>
+	</div>
+    <div class="form-row" id="hidden" style="display:none">
+		<input type="text" id="node-input-name">
+	</div>
+    <div class="form-row" id="arg0" style="display:none">
+        <label id="label-input-arg0" for="node-input-arg0">Invoke</label>
+		<input type="text" id="node-input-arg0">
+	</div>
+    <div class="form-row" id="arg1" style="display:none">
+        <label id="label-input-arg1" for="node-input-arg1">Invoke</label>
+		<input type="text" id="node-input-arg1">
+	</div>
+    <div class="form-row" id="arg2" style="display:none">
+        <label id="label-input-arg2" for="node-input-arg2">Invoke</label>
+		<input type="text" id="node-input-arg2">
+	</div>
+    <div class="form-row" id="arg3" style="display:none">
+        <label id="label-input-arg3" for="node-input-arg3">Invoke</label>
+		<input type="text" id="node-input-arg3">
+	</div>
+    <div class="form-row" id="arg4" style="display:none">
+        <label id="label-input-arg4" for="node-input-arg4">Invoke</label>
+		<input type="text" id="node-input-arg4">
+	</div>
+    <div class="form-row" id="arg5" style="display:none">
+        <label id="label-input-arg5" for="node-input-arg5">Invoke</label>
+		<input type="text" id="node-input-arg5">
+	</div>
+    <div class="form-row" id="arg6" style="display:none">
+        <label id="label-input-arg6" for="node-input-arg6">Invoke</label>
+		<input type="text" id="node-input-arg6">
+	</div>
+    <div class="form-row" id="arg7" style="display:none">
+        <label id="label-input-arg7" for="node-input-arg7">Invoke</label>
+		<input type="text" id="node-input-arg7">
+	</div>
+    <div class="form-row" id="arg8" style="display:none">
+        <label id="label-input-arg8" for="node-input-arg8">Invoke</label>
+		<input type="text" id="node-input-arg8">
+	</div>
+    <div class="form-row" id="arg9" style="display:none">
+        <label id="label-input-arg9" for="node-input-arg9">Invoke</label>
+		<input type="text" id="node-input-arg9">
+	</div>
+	<div class="form-tips" id="desc-note"></div>
+</script>
+
+<script type="text/x-red" data-help-name="mimic">
+    <p>Node to invoke MIMIC API - global management functions</p>
+</script>
+
+<script type="text/x-red" data-template-name="agent">
+	<div class="form-row" id="select-div">
+        <label for="node-input-api">Invoke</label>
+        <select value="" id="node-input-api" placeholder=""></select>
+	</div>
+    <div class="form-row" id="hidden" style="display:none">
+		<input type="text" id="node-input-name">
+	</div>
+    <div class="form-row" id="arg0" style="display:none">
+        <label id="label-input-arg0" for="node-input-arg0">Invoke</label>
+		<input type="text" id="node-input-arg0">
+	</div>
+    <div class="form-row" id="arg1" style="display:none">
+        <label id="label-input-arg1" for="node-input-arg1">Invoke</label>
+		<input type="text" id="node-input-arg1">
+	</div>
+    <div class="form-row" id="arg2" style="display:none">
+        <label id="label-input-arg2" for="node-input-arg2">Invoke</label>
+		<input type="text" id="node-input-arg2">
+	</div>
+    <div class="form-row" id="arg3" style="display:none">
+        <label id="label-input-arg3" for="node-input-arg3">Invoke</label>
+		<input type="text" id="node-input-arg3">
+	</div>
+    <div class="form-row" id="arg4" style="display:none">
+        <label id="label-input-arg4" for="node-input-arg4">Invoke</label>
+		<input type="text" id="node-input-arg4">
+	</div>
+    <div class="form-row" id="arg5" style="display:none">
+        <label id="label-input-arg5" for="node-input-arg5">Invoke</label>
+		<input type="text" id="node-input-arg5">
+	</div>
+    <div class="form-row" id="arg6" style="display:none">
+        <label id="label-input-arg6" for="node-input-arg6">Invoke</label>
+		<input type="text" id="node-input-arg6">
+	</div>
+    <div class="form-row" id="arg7" style="display:none">
+        <label id="label-input-arg7" for="node-input-arg7">Invoke</label>
+		<input type="text" id="node-input-arg7">
+	</div>
+    <div class="form-row" id="arg8" style="display:none">
+        <label id="label-input-arg8" for="node-input-arg8">Invoke</label>
+		<input type="text" id="node-input-arg8">
+	</div>
+    <div class="form-row" id="arg9" style="display:none">
+        <label id="label-input-arg9" for="node-input-arg9">Invoke</label>
+		<input type="text" id="node-input-arg9">
+	</div>
+	<div class="form-tips" id="desc-note"></div>
+</script>
+
+<script type="text/x-red" data-help-name="agent">
+    <p>Node to invoke MIMIC API - agent management functions</p>
+</script>
+
+<script type="text/x-red" data-template-name="valuespace">
+	<div class="form-row" id="select-div">
+        <label for="node-input-api">Invoke</label>
+        <select value="" id="node-input-api" placeholder=""></select>
+	</div>
+    <div class="form-row" id="hidden" style="display:none">
+		<input type="text" id="node-input-name">
+	</div>
+    <div class="form-row" id="arg0" style="display:none">
+        <label id="label-input-arg0" for="node-input-arg0">Invoke</label>
+		<input type="text" id="node-input-arg0">
+	</div>
+    <div class="form-row" id="arg1" style="display:none">
+        <label id="label-input-arg1" for="node-input-arg1">Invoke</label>
+		<input type="text" id="node-input-arg1">
+	</div>
+    <div class="form-row" id="arg2" style="display:none">
+        <label id="label-input-arg2" for="node-input-arg2">Invoke</label>
+		<input type="text" id="node-input-arg2">
+	</div>
+    <div class="form-row" id="arg3" style="display:none">
+        <label id="label-input-arg3" for="node-input-arg3">Invoke</label>
+		<input type="text" id="node-input-arg3">
+	</div>
+    <div class="form-row" id="arg4" style="display:none">
+        <label id="label-input-arg4" for="node-input-arg4">Invoke</label>
+		<input type="text" id="node-input-arg4">
+	</div>
+    <div class="form-row" id="arg5" style="display:none">
+        <label id="label-input-arg5" for="node-input-arg5">Invoke</label>
+		<input type="text" id="node-input-arg5">
+	</div>
+    <div class="form-row" id="arg6" style="display:none">
+        <label id="label-input-arg6" for="node-input-arg6">Invoke</label>
+		<input type="text" id="node-input-arg6">
+	</div>
+    <div class="form-row" id="arg7" style="display:none">
+        <label id="label-input-arg7" for="node-input-arg7">Invoke</label>
+		<input type="text" id="node-input-arg7">
+	</div>
+    <div class="form-row" id="arg8" style="display:none">
+        <label id="label-input-arg8" for="node-input-arg8">Invoke</label>
+		<input type="text" id="node-input-arg8">
+	</div>
+    <div class="form-row" id="arg9" style="display:none">
+        <label id="label-input-arg9" for="node-input-arg9">Invoke</label>
+		<input type="text" id="node-input-arg9">
+	</div>
+	<div class="form-tips" id="desc-note"></div>
+</script>
+
+<script type="text/x-red" data-help-name="valuespace">
+    <p>Node to invoke MIMIC API - agent value space management functions</p>
+</script>
